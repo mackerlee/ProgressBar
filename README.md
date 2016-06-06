@@ -100,6 +100,14 @@ android 61-63 lesson
         android:text="用静态方法实现对话框进度条"
         android:layout_below="@id/button03"
         android:onClick="onClick"/>
+        
+    //--创建一个自定义的进度条
+    <ProgressBar
+        android:id="@+id/progressBar04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        //--将该进度条与res->drawable中定义的自定义进度条的pdzdy.xml关联起来
+        android:indeterminateDrawable="@drawable/pdzdy"/>
   </RelativeLayout>
   
   在app->java->包名->MainActivity.java中：
@@ -162,6 +170,20 @@ android 61-63 lesson
         }
     }
 
-3.自定义进度条：通过一个图片来自定义进度条.
-    --a.在res/drawable/下创建一个layer-list
-    --b.设置ProgressBar的android:indeterminateDrawable属性
+3.自定义进度条：通过一个图片来自定义进度条，首先自己找到一副进度条图片如jdt.jpg：
+    --a.在res/drawable/下创建一个layer-list的xml文件，在该文件中定义jdt.jpg图片的旋转方式,如角度/方向等等
+    --b.设置ProgressBar的android:indeterminateDrawable属性来指定该文件
+    --c.在res->drawable中定义自定义进度条的pdzdy.xml,如下：
+    <?xml version="1.0" encoding="utf-8"?>
+    //--设置一个图层列表xml文件
+    <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+        <item>
+            //--与自定义图片jdt.jpg关联作为进度条的图片
+            <rotate android:drawable="@drawable/jdt"
+                    android:fromDegrees="0"  //从0度开始旋转
+                    android:toDegrees="360"  //一直旋转到360度
+                    android:pivotX="50%"     //旋转的中心轴的x坐标，50%即表示中间位置
+                    android:pivotY="50%"/>   //旋转的中心轴的y坐标
+        </item>
+    </layer-list>
+    剩余部分代码在上面
